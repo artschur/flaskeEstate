@@ -1,0 +1,20 @@
+{% extends 'base.html'%} {% block head %} <title>Hello</title> {%endblock%} {%
+block body %}
+<div class="flex items-center justify-center h-full m-4 bg-zinc-800">
+  <div class="h-64">
+    <h1 class="mb-4 text-4xl text-cyan-400">{{estate.price}}</h1>
+    <div class="gap-16 text-2xl">
+      <div>
+        <p class="">{{estate.address}}</p>
+      </div>
+      <div class="mt-4 columns-2">
+        <p>{{estate.bedrooms}} Quartos</p>
+        <p>{{estate.area}}M²</p>
+        <p>{{estate.type}}</p>
+        <p>{{estate.bathrooms}} Banheiros</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

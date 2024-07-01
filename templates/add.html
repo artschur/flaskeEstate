@@ -1,0 +1,77 @@
+{% extends 'base.html'%} {% block head %} <title>Hello</title> {%endblock%} {%
+block body %}
+<div class="flex flex-col items-center justify-center h-screen">
+  <h1 class="mb-6 text-3xl">Adicione seu imóvel.</h1>
+  <form
+    action="/add"
+    method="post"
+    class="flex flex-col items-center justify-center w-11/12"
+  >
+    <div class="grid grid-cols-1 md:grid-cols-2">
+      <div class="grid grid-cols-2">
+        <label class="p-4" for="address">Endereço:</label>
+        <input
+          type="text"
+          class="w-48 p-1 mb-2 rounded-lg bg-zinc-600"
+          name="address"
+          id="address"
+        />
+      </div>
+      <div class="grid grid-cols-2">
+        <label class="p-4" for="price">Preço:</label>
+        <input
+          type="text"
+          class="w-48 mb-2 rounded-lg bg-zinc-600"
+          name="price"
+          id="price"
+        />
+      </div>
+      <div class="grid grid-cols-2">
+        <label class="p-4" for="bedrooms">Quartos:</label>
+        <input
+          type="text"
+          class="w-48 p-1 mb-2 rounded-lg bg-zinc-600"
+          name="bedrooms"
+          id="bedrooms"
+        />
+      </div>
+      <div class="grid grid-cols-2">
+        <label class="p-4" for="bathrooms">Banheiros:</label>
+        <input
+          type="text"
+          class="w-48 p-1 mb-2 rounded-lg bg-zinc-600"
+          name="bathrooms"
+          id="bathrooms"
+        />
+      </div>
+      <div class="grid grid-cols-2">
+        <label class="p-4" for="area">Área:</label>
+        <input
+          type="text"
+          class="w-48 p-1 mb-2 rounded-lg bg-zinc-600"
+          name="area"
+          id="area"
+        />
+      </div>
+      <div class="grid grid-cols-2">
+        <label for="type" class="p-4">Tipo:</label>
+        <select
+          name="type"
+          id="type"
+          class="w-48 p-1 mb-2 rounded-lg bg-zinc-600"
+        >
+          <option selected value="Apartamento">Apartamento</option>
+          <option value="Casa">Casa</option>
+          <option value="Terreno">Terreno</option>
+          <option value="Galpao">Galpão</option>
+        </select>
+      </div>
+    </div>
+    <input
+      type="submit"
+      value="Adicionar Imóvel"
+      class="w-48 p-3 mt-4 mb-2 rounded-lg bg-cyan-500 border-cyan-500 max-w-36 border-1 text-zinc-50"
+    />
+  </form>
+</div>
+{% endblock %}

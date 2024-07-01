@@ -1,0 +1,54 @@
+{% extends 'base.html'%} {% block head %} <title>Hello</title> {%endblock%} {%
+block body %}
+<div class="flex flex-col items-center">
+  <div class="w-11/12 m-6 text-lg">
+    <div class="flex justify-between w-full mt-4 mb-4">
+      <div>
+        <h1 class="mt-4 text-3xl text-cyan-400">Seja bem vindo!</h1>
+        <p>Seus imóveis em um só lugar.</p>
+      </div>
+
+      <div class="flex items-end">
+        <a href="add" class="p-2 rounded-lg bg-cyan-500">Adicionar</a>
+      </div>
+    </div>
+
+    <div id="content" class="flex flex-col items-center">
+      <div class="w-full max-w-6xl p-6 m-4 text-xl rounded-lg bg-zinc-600">
+        <h2 class="mb-3 text-4xl text-cyan-500">R$ {{total}}</h2>
+        <p>Total de imóveis cadastrados: {{ nImoveis }}</p>
+      </div>
+      {% for estate in estates %}
+      <div class="w-full max-w-6xl p-6 m-4 text-xl rounded-lg bg-zinc-600">
+        <div class="flex justify-center md:justify-start">
+          <img
+            class="object-cover w-10/12 mb-4 rounded-lg md:w-8/12"
+            src="https://source.unsplash.com/random/?property"
+            alt=""
+          />
+        </div>
+        <h2 class="mb-3 text-3xl text-cyan-500">R${{ estate.price }}</h2>
+
+        <div class="gap-16 text-xl">
+          <div>
+            <p class="">{{estate.address}}</p>
+          </div>
+          <div class="mt-4 columns-2">
+            <p>{{estate.bedrooms}} Quartos</p>
+            <p>{{estate.area}}M²</p>
+            <p>{{estate.type}}</p>
+            <p>{{estate.bathrooms}} Banheiros</p>
+          </div>
+        </div>
+        <form action="/delete/{{ estate.id  }}" method="post">
+          <!-- #anchor tags are for navigation. -->
+          <button class="p-2 mt-4 bg-red-500 rounded-lg" type="submit">
+            Deletar
+          </button>
+        </form>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% endblock %}
+</div>
