@@ -1,54 +1,61 @@
-{% extends 'base.html'%} {% block head %} <title>Hello</title> {%endblock%} {%
-block body %}
+{% extends 'base.html'%}
+
+{% block head %}
+<title>Hello</title>
+{% endblock %}
+
+{% block body %}
 <div class="flex flex-col items-center">
   <div class="w-11/12 m-6 text-lg">
     <div class="flex justify-between w-full mt-4 mb-4">
       <div>
-        <h1 class="mt-4 text-3xl text-cyan-400">Seja bem vindo!</h1>
+        <h1 class="mt-4 text-3xl text-pink-500">Seja bem vindo!</h1>
         <p>Seus imóveis em um só lugar.</p>
       </div>
 
       <div class="flex items-end">
-        <a href="add" class="p-2 rounded-lg bg-cyan-500">Adicionar</a>
+        <a href="add" class="p-2 rounded-lg bg-pink-500">Adicionar</a>
       </div>
     </div>
 
     <div id="content" class="flex flex-col items-center">
-      <div class="w-full max-w-6xl p-6 m-4 text-xl rounded-lg bg-zinc-600">
-        <h2 class="mb-3 text-4xl text-cyan-500">R$ {{total}}</h2>
+      <div class="w-full md:max-w-6xl p-6 m-4 text-xl rounded-lg bg-neutral-50">
+        <h2 class="mb-3 text-4xl text-pink-500">R$ {{total}}</h2>
         <p>Total de imóveis cadastrados: {{ nImoveis }}</p>
       </div>
       {% for estate in estates %}
-      <div class="w-full max-w-6xl p-6 m-4 text-xl rounded-lg bg-zinc-600">
-        <div class="flex justify-center md:justify-start">
-          <img
-            class="object-cover w-10/12 mb-4 rounded-lg md:w-8/12"
-            src="https://source.unsplash.com/random/?property"
-            alt=""
-          />
+      <div class="w-full md:max-w-2xl lg:max-w-4xl xl:max-w-6xl p-6 m-4 text-xl rounded-lg bg-neutral-50 flex flex-col justify-center">
+        <div class="mb-6 max-w-full md:max-w-full flex justify-center lg:justify-start items-center">
+          {% if estate.img_url %}
+          <img class="estate-img max-h-96 object-cover rounded-md" src="{{ url_for('static', filename='images/' + estate.img_url) }}" alt="Estate Image">
+          {% else %}
+          <p>No Image Available</p>
+          {% endif %}
         </div>
-        <h2 class="mb-3 text-3xl text-cyan-500">R${{ estate.price }}</h2>
 
-        <div class="gap-16 text-xl">
-          <div>
-            <p class="">{{estate.address}}</p>
-          </div>
-          <div class="mt-4 columns-2">
-            <p>{{estate.bedrooms}} Quartos</p>
-            <p>{{estate.area}}M²</p>
-            <p>{{estate.type}}</p>
-            <p>{{estate.bathrooms}} Banheiros</p>
-          </div>
+        <div>
+          <p>{{estate.type}}</p>
+          <h2 class="mb-3 text-3xl text- text-pink-700">R${{ estate.price }}</h2>
+
+        
+
+        <div class="mt-4 columns-2  md:justify-between">
+          <p>{{estate.bedrooms}} Quartos</p>
+          <p>{{estate.area}}M²</p>
+          <p>{{estate.bathrooms}} Banheiros</p>
         </div>
-        <form action="/delete/{{ estate.id  }}" method="post">
-          <!-- #anchor tags are for navigation. -->
-          <button class="p-2 mt-4 bg-red-500 rounded-lg" type="submit">
-            Deletar
-          </button>
-        </form>
+        <p class="text-neutral-400">{{estate.address}}</p>
+        </div>
+        <div>
+          <form action="/delete/{{ estate.id }}" method="post">
+            <button class="p-2 mt-4 bg-red-200 rounded-lg" type="submit">
+              Deletar
+            </button>
+          </form>
+        </div>
       </div>
       {% endfor %}
     </div>
   </div>
-  {% endblock %}
 </div>
+{% endblock %}

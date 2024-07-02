@@ -2,6 +2,9 @@
 block body %}
 <div class="flex items-center justify-center h-full m-4 bg-zinc-800">
   <div class="h-64">
+    <div>
+      <img src="{{ url_for('static', filename='images/' + estate.img_url)}}" alt="">
+    </div>
     <h1 class="mb-4 text-4xl text-cyan-400">{{estate.price}}</h1>
     <div class="gap-16 text-2xl">
       <div>

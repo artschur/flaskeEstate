@@ -1,9 +1,13 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
+import os
+from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///estates.db"
 db = SQLAlchemy(app)
+UPLOAD_FOLDER = "static/images"
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 
 class Estate(db.Model):
@@ -14,6 +18,7 @@ class Estate(db.Model):
     bathrooms = db.Column(db.Integer, nullable=False)
     area = db.Column(db.Integer, nullable=False)
     type = db.Column(db.String(100), nullable=False)
+    img_url = db.Column(db.String(100), nullable=True)
 
     def __repr__(self):
         return f"estate at {self.address} for {self.price} "
@@ -22,25 +27,36 @@ class Estate(db.Model):
 @app.route("/add", methods=["POST", "GET"])
 def add():
     if request.method == "POST":
-        address = request.form["address"]
-        price = int(request.form["price"].replace(".", ""))
-        bedrooms = int(request.form["bedrooms"])
-        bathrooms = int(request.form["bathrooms"])
-        area = int(request.form["area"])
-        typee = request.form.get("type")
+        if 'image' not in request.files:
+            return 'No image part'
+        file = request.files['image']
+        if file.filename == '':
+            return 'No selected image'
+        if file:
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
-        estate = Estate(
-            address=address,
-            price=price,
-            bedrooms=bedrooms,
-            bathrooms=bathrooms,
-            area=area,
-            type=typee,
-        )
+            address = request.form["address"]
+            price = int(request.form["price"].replace(".", ""))
+            bedrooms = int(request.form["bedrooms"])
+            bathrooms = int(request.form["bathrooms"])
+            area = int(request.form["area"])
+            typee = request.form.get("type")
+            image_url = filename
 
-        db.session.add(estate)
-        db.session.commit()
-        return redirect("/")
+            estate = Estate(
+                address=address,
+                price=price,
+                bedrooms=bedrooms,
+                bathrooms=bathrooms,
+                area=area,
+                type=typee,
+                img_url=image_url
+            )
+
+            db.session.add(estate)
+            db.session.commit()
+            return redirect("/")
     else:
         return render_template("add.html", title="Add Estate")
 
