@@ -66,6 +66,7 @@ def deleteEstate(id):
     if request.method == "POST":
         estate = Estate.query.get(id)
         db.session.delete(estate)
+        os.remove(os.path.join(app.config['UPLOAD_FOLDER'], estate.img_url))
         db.session.commit()
         return redirect("/")
 

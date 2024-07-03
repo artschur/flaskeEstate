@@ -1,23 +1,28 @@
 {% extends 'base.html'%} {% block head %} <title>Hello</title> {%endblock%} {%
 block body %}
-<div class="flex items-center justify-center h-full m-4 bg-zinc-800">
-  <div class="h-64">
-    <div>
-      <img src="{{ url_for('static', filename='images/' + estate.img_url)}}" alt="">
+<div class="flex items-center justify-center h-full m-4 bg-neutral-50">
+  <div class=" p-6 m-4 text-xl rounded-lg bg-neutral-50 flex flex-col items-start justify-center">
+    <div class="mb-6  flex justify-start w-full ">
+      {% if estate.img_url %}
+      <img class="estate-img max-h-96 object-cover rounded-md" src="{{ url_for('static', filename='images/' + estate.img_url) }}" alt="Estate Image">
+      {% else %}
+      <p>No Image Available</p>
+      {% endif %}
     </div>
-    <h1 class="mb-4 text-4xl text-cyan-400">{{estate.price}}</h1>
-    <div class="gap-16 text-2xl">
-      <div>
-        <p class="">{{estate.address}}</p>
-      </div>
-      <div class="mt-4 columns-2">
-        <p>{{estate.bedrooms}} Quartos</p>
-        <p>{{estate.area}}M²</p>
-        <p>{{estate.type}}</p>
-        <p>{{estate.bathrooms}} Banheiros</p>
-      </div>
+
+    <div class="flex flex-col justify-start items-start ">
+      <p>{{estate.type}}</p>
+      <h2 class="mb-3 text-3xl text- text-pink-600">R${{ estate.price }}</h2>
+
+    
+
+    <div class="mt-4 columns-2  ">
+      <p>{{estate.bedrooms}} Quartos</p>
+      <p>{{estate.area}}M²</p>
+      <p>{{estate.bathrooms}} Banheiros</p>
     </div>
-  </div>
+    <p class="text-neutral-400">{{estate.address}}</p>
+    </div>
 </div>
 
 {% endblock %}

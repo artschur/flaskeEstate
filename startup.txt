@@ -1,0 +1,2 @@
+start venv, start app py
+start tailwind using npx -i blablablabl
