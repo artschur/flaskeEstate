@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 import os
 from werkzeug.utils import secure_filename
+from flask_migrate import Migrate
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///estates.db"
@@ -9,8 +10,10 @@ db = SQLAlchemy(app)
 UPLOAD_FOLDER = "static/images"
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
+migrate = Migrate(app, db)
 
 class Estate(db.Model):
+    ownerId = db.Column(db.Integer)
     id = db.Column(db.Integer, primary_key=True)
     address = db.Column(db.String(100), nullable=False)
     price = db.Column(db.Integer, nullable=False)
@@ -22,7 +25,6 @@ class Estate(db.Model):
 
     def __repr__(self):
         return f"estate at {self.address} for {self.price} "
-
 
 @app.route("/add", methods=["POST", "GET"])
 def add():
@@ -36,6 +38,7 @@ def add():
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
+
             address = request.form["address"]
             price = int(request.form["price"].replace(".", ""))
             bedrooms = int(request.form["bedrooms"])
@@ -45,6 +48,7 @@ def add():
             image_url = filename
 
             estate = Estate(
+                ownerId=1,
                 address=address,
                 price=price,
                 bedrooms=bedrooms,
