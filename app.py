@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 import os
 from flask_migrate import Migrate
 from werkzeug.utils import secure_filename
+from marshmallow_sqlalchemy import SQLAlchemyAutoSchema
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///estates.db"
@@ -11,6 +12,7 @@ UPLOAD_FOLDER = "static/images"
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 migrate = Migrate(app, db)
+
 
 class Estate(db.Model):
     ownerId = db.Column(db.Integer)
@@ -26,13 +28,21 @@ class Estate(db.Model):
     def __repr__(self):
         return f"estate at {self.address} for {self.price} "
 
-@app.route('/api/imb/<id>')
-def apiRespoIm(id):
+#defining marshmallow schema
+class EstateSchema(SQLAlchemyAutoSchema):
+    class Meta:
+        model = Estate
+        load_instance = True
+
+estate_schema = EstateSchema()
+
+@app.route('/api/<id>')
+def getIdRest(id):
         imovel = Estate.query.get(id)
-
-
-
-
+        try:
+            return jsonify(estate_schema.dump(imovel))
+        except:
+            return 'erro'
 
 @app.route("/add", methods=["POST", "GET"])
 def add():
