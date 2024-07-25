@@ -1,7 +1,6 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 import os
-from werkzeug.utils import secure_filename
 from flask_migrate import Migrate
 
 app = Flask(__name__)
@@ -35,7 +34,7 @@ def add():
         if file.filename == '':
             return 'No selected image'
         if file:
-            filename = secure_filename(file.filename)
+            filename = (file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
 
@@ -69,8 +68,11 @@ def add():
 def deleteEstate(id):
     if request.method == "POST":
         estate = Estate.query.get(id)
+        try:
+            os.remove(os.path.join(app.config['UPLOAD_FOLDER'], estate.img_url))
+        except:
+            pass
         db.session.delete(estate)
-        os.remove(os.path.join(app.config['UPLOAD_FOLDER'], estate.img_url))
         db.session.commit()
         return redirect("/")
 
