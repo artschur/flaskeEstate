@@ -566,6 +566,10 @@ video {
   margin: 1.5rem;
 }
 
+.m-2 {
+  margin: 0.5rem;
+}
+
 .mb-2 {
   margin-bottom: 0.5rem;
 }
@@ -586,26 +590,6 @@ video {
   margin-top: 1rem;
 }
 
-.ms-6 {
-  margin-inline-start: 1.5rem;
-}
-
-.ms-32 {
-  margin-inline-start: 8rem;
-}
-
-.ms-36 {
-  margin-inline-start: 9rem;
-}
-
-.ms-\[34rem\] {
-  margin-inline-start: 34rem;
-}
-
-.ms-\[8\.5rem\] {
-  margin-inline-start: 8.5rem;
-}
-
 .block {
   display: block;
 }
@@ -616,10 +600,6 @@ video {
 
 .h-12 {
   height: 3rem;
-}
-
-.h-64 {
-  height: 16rem;
 }
 
 .h-full {
@@ -646,8 +626,16 @@ video {
   width: 100%;
 }
 
-.w-9\/12 {
-  width: 75%;
+.w-10\/12 {
+  width: 83.333333%;
+}
+
+.min-w-14 {
+  min-width: 3.5rem;
+}
+
+.min-w-32 {
+  min-width: 8rem;
 }
 
 .max-w-36 {
@@ -693,10 +681,6 @@ video {
 
 .justify-between {
   justify-content: space-between;
-}
-
-.gap-16 {
-  gap: 4rem;
 }
 
 .rounded-lg {
@@ -745,11 +729,6 @@ video {
   background-color: rgb(254 202 202 / var(--tw-bg-opacity));
 }
 
-.bg-zinc-800 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(39 39 42 / var(--tw-bg-opacity));
-}
-
 .object-cover {
   -o-object-fit: cover;
      object-fit: cover;
@@ -765,11 +744,6 @@ video {
 
 .p-6 {
   padding: 1.5rem;
-}
-
-.text-2xl {
-  font-size: 1.5rem;
-  line-height: 2rem;
 }
 
 .text-3xl {
@@ -792,11 +766,6 @@ video {
   line-height: 1.75rem;
 }
 
-.text-cyan-400 {
-  --tw-text-opacity: 1;
-  color: rgb(34 211 238 / var(--tw-text-opacity));
-}
-
 .text-gray-900 {
   --tw-text-opacity: 1;
   color: rgb(17 24 39 / var(--tw-text-opacity));
@@ -810,6 +779,11 @@ video {
 .text-pink-500 {
   --tw-text-opacity: 1;
   color: rgb(236 72 153 / var(--tw-text-opacity));
+}
+
+.text-pink-600 {
+  --tw-text-opacity: 1;
+  color: rgb(219 39 119 / var(--tw-text-opacity));
 }
 
 .text-pink-700 {
@@ -829,11 +803,6 @@ video {
 .text-zinc-900 {
   --tw-text-opacity: 1;
   color: rgb(24 24 27 / var(--tw-text-opacity));
-}
-
-.text-pink-600 {
-  --tw-text-opacity: 1;
-  color: rgb(219 39 119 / var(--tw-text-opacity));
 }
 
 .file\:border-0::file-selector-button {
@@ -894,20 +863,12 @@ video {
 }
 
 @media (min-width: 1024px) {
-  .lg\:ms-\[8\.5rem\] {
-    margin-inline-start: 8.5rem;
-  }
-
   .lg\:max-w-4xl {
     max-width: 56rem;
   }
 
   .lg\:justify-start {
     justify-content: flex-start;
-  }
-
-  .lg\:justify-center {
-    justify-content: center;
   }
 }
 
