@@ -14,20 +14,20 @@
       </div>
 
       <div class="flex items-end">
-        <a href="add" class="p-2 rounded-lg bg-pink-500">Adicionar</a>
+        <a href="add" class="p-2 bg-pink-500 rounded-lg">Adicionar</a>
       </div>
     </div>
 
     <div id="content" class="flex flex-col items-center">
-      <div class="w-full md:max-w-6xl p-6 m-4 text-xl rounded-lg bg-neutral-50">
+      <div class="w-full p-6 m-4 text-xl rounded-lg md:max-w-6xl bg-neutral-50">
         <h2 class="mb-3 text-4xl text-pink-500">R$ {{total}}</h2>
         <p>Total de imóveis cadastrados: {{ nImoveis }}</p>
       </div>
       {% for estate in estates %}
-      <div class="w-full md:max-w-2xl lg:max-w-4xl xl:max-w-6xl p-6 m-4 text-xl rounded-lg bg-neutral-50 flex flex-col justify-center">
-        <div class="mb-6 max-w-full md:max-w-full flex justify-center lg:justify-start items-center">
+      <div class="flex flex-col justify-center w-full p-6 m-4 text-xl rounded-lg md:max-w-2xl lg:max-w-4xl xl:max-w-6xl bg-neutral-50">
+        <div class="flex items-center justify-center max-w-full mb-6 md:max-w-full lg:justify-start">
           {% if estate.img_url %}
-          <img class="estate-img max-h-96 object-cover rounded-md" src="{{ url_for('static', filename='images/' + estate.img_url) }}" alt="Estate Image">
+          <img class="object-cover rounded-md estate-img max-h-96" src="{{ url_for('static', filename='images/' + estate.img_url) }}" alt="Estate Image">
           {% else %}
           <p>No Image Available</p>
           {% endif %}
@@ -35,11 +35,11 @@
 
         <div>
           <p>{{estate.type}}</p>
-          <h2 class="mb-3 text-3xl text- text-pink-700">R${{ estate.price }}</h2>
+          <h2 class="mb-3 text-3xl text-pink-700 text-">R${{ estate.price }}</h2>
 
         
 
-        <div class="mt-4 columns-2  md:justify-between">
+        <div class="mt-4 columns-2 md:justify-between">
           <p>{{estate.bedrooms}} Quartos</p>
           <p>{{estate.area}}M²</p>
           <p>{{estate.bathrooms}} Banheiros</p>

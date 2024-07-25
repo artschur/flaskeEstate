@@ -1,22 +1,22 @@
 {% extends 'base.html'%} {% block head %} <title>Hello</title> {%endblock%} {%
 block body %}
 <div class="flex items-center justify-center h-full m-4 bg-neutral-50">
-  <div class=" p-6 m-4 text-xl rounded-lg bg-neutral-50 flex flex-col items-start justify-center">
-    <div class="mb-6  flex justify-start w-full ">
+  <div class="flex flex-col items-start justify-center p-6 m-4 text-xl rounded-lg  bg-neutral-50">
+    <div class="flex justify-start w-full mb-6 ">
       {% if estate.img_url %}
-      <img class="estate-img max-h-96 object-cover rounded-md" src="{{ url_for('static', filename='images/' + estate.img_url) }}" alt="Estate Image">
+      <img class="object-cover rounded-md estate-img max-h-96" src="{{ url_for('static', filename='images/' + estate.img_url) }}" alt="Estate Image">
       {% else %}
       <p>No Image Available</p>
       {% endif %}
     </div>
 
-    <div class="flex flex-col justify-start items-start ">
+    <div class="flex flex-col items-start justify-start ">
       <p>{{estate.type}}</p>
-      <h2 class="mb-3 text-3xl text- text-pink-600">R${{ estate.price }}</h2>
+      <h2 class="mb-3 text-3xl text-pink-600 text-">R${{ estate.price }}</h2>
 
     
 
-    <div class="mt-4 columns-2  ">
+    <div class="mt-4 columns-2 ">
       <p>{{estate.bedrooms}} Quartos</p>
       <p>{{estate.area}}M²</p>
       <p>{{estate.bathrooms}} Banheiros</p>

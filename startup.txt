@@ -1,1 +1,2 @@
 npx tailwindcss -i ./static/src/input.css -o ./static/dist/css/output.css --watch
+flask run --host=0.0.0.0 --port=3000 --debug    

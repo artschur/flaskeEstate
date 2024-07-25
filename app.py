@@ -1,7 +1,8 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, jsonify, json
 from flask_sqlalchemy import SQLAlchemy
 import os
 from flask_migrate import Migrate
+from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///estates.db"
@@ -25,6 +26,14 @@ class Estate(db.Model):
     def __repr__(self):
         return f"estate at {self.address} for {self.price} "
 
+@app.route('/api/imb/<id>')
+def apiRespoIm(id):
+        imovel = Estate.query.get(id)
+
+
+
+
+
 @app.route("/add", methods=["POST", "GET"])
 def add():
     if request.method == "POST":
@@ -34,8 +43,8 @@ def add():
         if file.filename == '':
             return 'No selected image'
         if file:
-            filename = (file.filename)
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            filename = secure_filename((file.filename))
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], (filename)))
 
 
             address = request.form["address"]

@@ -3,36 +3,36 @@
 <title>Hello</title>
 {% endblock %}
 {% block body %}
-<div class="flex flex-col w-10/12 items-center justify-center h-screen">
-  <h1 class="mb-6 text-3xl">Adicione seu imovel aqui .</h1>
+<div class="flex flex-col items-center justify-center w-10/12 h-screen">
+  <h1 class="mb-6 text-3xl">Adicione seu imovel aqui.</h1>
   <form action="{{ url_for('add') }}" method="post" enctype="multipart/form-data" class="flex flex-col items-center justify-center w-10/12">
     <div class="columns-2 ">
       <div class="">
-        <input type="text" placeholder="Endereço" class="w-11/12 min-w-32 p-2 h-12 mb-2  bg-neutral-50  border border-neutral-300 text-gray-900  rounded-lg focus:ring-pink-500 hover:border-pink-500 focus:border-pink-500 " name="address" id="address" />
+        <input type="text" placeholder="Endereço" class="w-11/12 h-12 p-2 mb-2 text-gray-900 border rounded-lg min-w-32 bg-neutral-50 border-neutral-300 focus:ring-pink-500 hover:border-pink-500 focus:border-pink-500 " name="address" id="address" />
       </div>
 
       <div class="">
-        <input type="text" placeholder="Preço do ímovel" class="w-11/12 min-w-32 p-2 h-12 mb-2 rounded-lg border-neutral-300 border  bg-neutral-50 focus:ring-pink-500 hover:border-pink-500 focus:border-pink-500" name="price" id="price" />
+        <input type="text" placeholder="Preço do ímovel" class="w-11/12 h-12 p-2 mb-2 border rounded-lg min-w-32 border-neutral-300 bg-neutral-50 focus:ring-pink-500 hover:border-pink-500 focus:border-pink-500" name="price" id="price" />
       </div>
 
       <div class="">
-        <input type="text" placeholder="Quartos" class="w-11/12 min-w-32 p-2 h-12 mb-2 bg-neutral-50  border border-neutral-300 text-gray-900  rounded-lg focus:ring-pink-500 hover:border-pink-500  focus:border-pink-500 " name="bedrooms" id="bedrooms" />
+        <input type="text" placeholder="Quartos" class="w-11/12 h-12 p-2 mb-2 text-gray-900 border rounded-lg min-w-32 bg-neutral-50 border-neutral-300 focus:ring-pink-500 hover:border-pink-500 focus:border-pink-500 " name="bedrooms" id="bedrooms" />
       </div>
 
       <div class="">
-        <input type="text" placeholder="Banheiros" class="w-11/12 min-w-32 p-2 h-12 mb-2 bg-neutral-50  border border-neutral-300 text-gray-900  rounded-lg focus:ring-pink-500 hover:border-pink-500 focus:border-pink-500 " name="bathrooms" id="bathrooms" />
+        <input type="text" placeholder="Banheiros" class="w-11/12 h-12 p-2 mb-2 text-gray-900 border rounded-lg min-w-32 bg-neutral-50 border-neutral-300 focus:ring-pink-500 hover:border-pink-500 focus:border-pink-500 " name="bathrooms" id="bathrooms" />
       </div>
 
       <div class="">
-        <input type="text" placeholder="Área do imóvel" class="w-11/12 min-w-32 p-2 h-12 mb-2 bg-neutral-50  border border-neutral-300 text-gray-900  rounded-lg focus:ring-pink-500 hover:border-pink-500 focus:border-pink-500 " name="area" id="area" />
+        <input type="text" placeholder="Área do imóvel" class="w-11/12 h-12 p-2 mb-2 text-gray-900 border rounded-lg min-w-32 bg-neutral-50 border-neutral-300 focus:ring-pink-500 hover:border-pink-500 focus:border-pink-500 " name="area" id="area" />
       </div>
 
       <div class="">
-        <input type="file" class="w-11/12 min-w-32 p-2 h-12 mb-2 text-gray-900 border  rounded-lg cursor-pointer bg-gray-50 file:bg-gray-50 file:border-0 border-neutral-300 hover:border-pink-300 text-transparent"  name="image" id="image" />
+        <input type="file" class="w-11/12 h-12 p-2 mb-2 text-transparent text-gray-900 border rounded-lg cursor-pointer min-w-32 bg-gray-50 file:bg-gray-50 file:border-0 border-neutral-300 hover:border-pink-300"  name="image" id="image" />
       </div>
 
       <div class="">
-        <select name="type" id="type" class="w-11/12 min-w-32 p-2 h-12 mb-2 bg-neutral-50  border border-nautral-300 text-gray-900  rounded-lg focus:ring-pink-500 hover:border-pink-500 focus:border-pink-500 ">
+        <select name="type" id="type" class="w-11/12 h-12 p-2 mb-2 text-gray-900 border rounded-lg min-w-32 bg-neutral-50 border-nautral-300 focus:ring-pink-500 hover:border-pink-500 focus:border-pink-500 ">
           <option selected value="Apartamento">Apartamento</option>
           <option value="Casa">Casa</option>
           <option value="Terreno">Terreno</option>
@@ -41,7 +41,7 @@
       </div>
 
     </div>
-    <input type="submit" value="Adicionar Imóvel" class="w-11/12 min-w-32 p-3 mt-4 mb-2 rounded-lg bg-pink-500 border-pink-500 hover:bg-neutral-50 hover:border-pink-500 hover:text-neutral-400 max-w-36 border-2 text-zinc-50" />
+    <input type="submit" value="Adicionar Imóvel" class="w-11/12 p-3 mt-4 mb-2 bg-pink-500 border-2 border-pink-500 rounded-lg min-w-32 hover:bg-neutral-50 hover:border-pink-500 hover:text-neutral-400 max-w-36 text-zinc-50" />
   </form>
 </div>
 {% endblock %}
