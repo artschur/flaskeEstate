@@ -36,13 +36,29 @@ class EstateSchema(SQLAlchemyAutoSchema):
 
 estate_schema = EstateSchema()
 
+@app.route('/api/all')
+def getAllEstates():
+    dict = {}
+    for i in Estate.query.all():
+        dict[i.id] = estate_schema.dump(i)
+    return dict
+
+@app.route('/api/<id>/img')
+def getImageId(id):
+    imovel = Estate.query.get(id)
+    try:
+        return imovel.image_url
+    except:
+        return ' erro ao encontrar imovel'
+    
+
 @app.route('/api/<id>')
 def getIdRest(id):
         imovel = Estate.query.get(id)
         try:
             return jsonify(estate_schema.dump(imovel))
         except:
-            return 'erro'
+            return 'Esse imovel não existe'
 
 @app.route("/add", methods=["POST", "GET"])
 def add():
