@@ -193,7 +193,7 @@ def deleteEstate(id):
             pass
         db.session.delete(estate)
         db.session.commit()
-        return redirect("/")
+        return redirect("/estates")
 
 
 @app.route("/find/<id>", methods=["GET"])
