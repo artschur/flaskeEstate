@@ -47,7 +47,7 @@ def getAllEstates():
 def getImageId(id):
     imovel = Estate.query.get(id)
     try:
-        return imovel.image_url
+        return imovel.image_urlf
     except:
         return ' erro ao encontrar imovel'
     
