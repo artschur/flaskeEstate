@@ -1,21 +1,30 @@
-from flask import Flask, render_template, request, redirect, jsonify, json
+from flask import Flask, render_template, request, redirect, jsonify, json, session
 from flask_sqlalchemy import SQLAlchemy
 import os
 from flask_migrate import Migrate
 from werkzeug.utils import secure_filename
 from marshmallow_sqlalchemy import SQLAlchemyAutoSchema
+import random
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///estates.db"
 db = SQLAlchemy(app)
 UPLOAD_FOLDER = "static/images"
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['SECRET_KEY'] = random.randint(0, 16)
 
 migrate = Migrate(app, db)
 
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(26), nullable=False)
+    password = db.Column(db.String(100), nullable=False)
+
+    def __repr__(self):
+        return f"User {self.name}"
 
 class Estate(db.Model):
-    ownerId = db.Column(db.Integer)
+    ownerId = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     id = db.Column(db.Integer, primary_key=True)
     address = db.Column(db.String(100), nullable=False)
     price = db.Column(db.Integer, nullable=False)
@@ -35,6 +44,26 @@ class EstateSchema(SQLAlchemyAutoSchema):
         load_instance = True
 
 estate_schema = EstateSchema()
+
+class UserSchema(SQLAlchemyAutoSchema):
+    class Meta:
+        model = User
+        load_instance = True
+
+user_schema = UserSchema()
+
+@app.route('/auth', methods=['POST', 'GET'])
+def auth():
+    if session.get('user') in User.query.all():
+
+        return redirect('/add')
+    
+
+@app.route('/login')
+def createAccount():
+    session['user'] = request.form['username']
+    session['password'] = request.form['password']
+    return render_template('login.html')
 
 @app.route('/api/all')
 def getAllEstates():
@@ -147,4 +176,5 @@ def index():
 
 
 if __name__ == "__main__":
+    db.create_all()
     app.run(debug=True)
