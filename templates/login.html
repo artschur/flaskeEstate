@@ -3,11 +3,11 @@
 <title>Hello</title>
 {% endblock %}
 {% block body %}
-<form action="/auth" method="post">
-    <label for="username">Username:</label>
-    <input type="text" name="username" id="username">
-    <label for="password">Password:</label>
-    <input type="password" name="password" id="password">
+<h1>Login</h1>
+<form action="/" method="post">
+    <input type="text" name="username" id="username" placeholder="username">
+    <input type="password" name="password" id="password" placeholder="passwor">
     <input type="submit" value="Login">
 </form>
+<a href="register">Criar uma Conta</a>
 {% endblock %}

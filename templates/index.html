@@ -9,12 +9,13 @@
   <div class="w-11/12 m-6 text-lg">
     <div class="flex justify-between w-full mt-4 mb-4">
       <div>
-        <h1 class="mt-4 text-3xl text-pink-500">Seja bem vindo!</h1>
+        <h1 class="mt-4 text-3xl text-pink-500">Seja bem vindo {{session.get('username')}}!</h1>
         <p>Seus imóveis em um só lugar.</p>
       </div>
 
       <div class="flex items-end">
         <a href="add" class="p-2 bg-pink-500 rounded-lg">Adicionar</a>
+        <form action="/logout" method="post"><button type="submit">logout</button></form>
       </div>
     </div>
 
