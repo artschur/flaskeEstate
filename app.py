@@ -88,7 +88,7 @@ def login():
 @app.route('/logout', methods=['POST', 'GET'])
 def logout():
     session.pop('username', None)
-    session.pop('password', None)
+
     return redirect(url_for('login'))        
 
 @app.route('/register', methods=['POST', 'GET'])
@@ -153,7 +153,8 @@ def add():
         if file.filename == '':
             return 'No selected image'
         if file:
-            filename = secure_filename((file.filename))
+            userId = str(User.query.filter_by(username=session.get('username')).first().id)
+            filename =  userId +secure_filename((file.filename) )
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], (filename)))
 
 

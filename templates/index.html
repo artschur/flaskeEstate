@@ -5,40 +5,55 @@
 {% endblock %}
 
 {% block body %}
-<div class="flex flex-col items-center">
-  <div class="w-11/12 m-6 text-lg">
-    <div class="flex justify-between w-full mt-4 mb-4">
-      <div>
-        <h1 class="mt-4 text-3xl text-pink-500">Seja bem vindo {{session.get('username')}}!</h1>
-        <p>Seus imóveis em um só lugar.</p>
+
+<div class="w-11/12 m-12 text-lg">
+  <div class="flex flex-col justify-between w-full mt-8 mb-4">
+    <div class="mx-32">
+      <div class="flex justify-between">
+        <div>
+          <h1 class="mt-4 text-3xl text-pink-600">Seja bem vindo {{session.get('username')}}!</h1>
+          <p>Seus imóveis em um só lugar.</p>
+        </div>
+        <div class="h-8 mt-6 ">
+          <form action="{{url_for('logout')}}" class="p-2 text-white bg-pink-600 rounded-lg " method="post"><button
+              type="submit">Logout</button></form>
+        </div>
+
+
       </div>
 
-      <div class="flex items-end">
-        <a href="add" class="p-2 bg-pink-500 rounded-lg">Adicionar</a>
-        <form action="{{url_for('logout')}}" method="post"><button type="submit">logout</button></form>
+      <div class="flex justify-center p-2 mt-4 text-white bg-pink-600 rounded-lg">
+        <a href="add" class="">Adicionar</a>
+
       </div>
     </div>
 
-    <div id="content" class="flex flex-col items-center">
-      <div class="w-full p-6 m-4 text-xl rounded-lg md:max-w-6xl bg-neutral-50">
-        <h2 class="mb-3 text-4xl text-pink-500">R$ {{total}}</h2>
-        <p>Total de imóveis cadastrados: {{ nImoveis }}</p>
+
+
+  </div>
+
+  <div id="content" class="flex flex-col items-center">
+    <div class="w-full p-6 m-4 text-xl rounded-lg md:max-w-6xl bg-neutral-50">
+      <h2 class="mb-3 text-4xl text-pink-600">R$ {{total}}</h2>
+      <p>Total de imóveis cadastrados: {{ nImoveis }}</p>
+    </div>
+    {% for estate in estates %}
+    <div
+      class="flex flex-col justify-center w-full p-6 m-4 text-xl rounded-lg md:max-w-2xl lg:max-w-4xl xl:max-w-6xl bg-neutral-50">
+      <div class="flex items-center justify-center max-w-full mb-6 md:max-w-full lg:justify-start">
+        {% if estate.img_url %}
+        <img class="object-cover rounded-md estate-img max-h-96"
+          src="{{ url_for('static', filename='images/' + estate.img_url) }}" alt="Estate Image">
+        {% else %}
+        <p>No Image Available</p>
+        {% endif %}
       </div>
-      {% for estate in estates %}
-      <div class="flex flex-col justify-center w-full p-6 m-4 text-xl rounded-lg md:max-w-2xl lg:max-w-4xl xl:max-w-6xl bg-neutral-50">
-        <div class="flex items-center justify-center max-w-full mb-6 md:max-w-full lg:justify-start">
-          {% if estate.img_url %}
-          <img class="object-cover rounded-md estate-img max-h-96" src="{{ url_for('static', filename='images/' + estate.img_url) }}" alt="Estate Image">
-          {% else %}
-          <p>No Image Available</p>
-          {% endif %}
-        </div>
 
-        <div>
-          <p>{{estate.type}}</p>
-          <h2 class="mb-3 text-3xl text-pink-700 text-">R${{ estate.price }}</h2>
+      <div>
+        <p>{{estate.type}}</p>
+        <h2 class="mb-3 text-3xl text-pink-600 text-">R${{ estate.price }}</h2>
 
-        
+
 
         <div class="mt-4 columns-2 md:justify-between">
           <p>{{estate.bedrooms}} Quartos</p>
@@ -46,17 +61,18 @@
           <p>{{estate.bathrooms}} Banheiros</p>
         </div>
         <p class="text-neutral-400">{{estate.address}}</p>
-        </div>
-        <div>
-          <form action="/delete/{{ estate.id }}" method="post">
-            <button class="p-2 mt-4 bg-red-200 rounded-lg" type="submit">
-              Deletar
-            </button>
-          </form>
-        </div>
       </div>
-      {% endfor %}
+      <div>
+        <form action="/delete/{{ estate.id }}" class="flex justify-center p-2 mt-4 text-white bg-pink-600 rounded-lg"
+          method="post">
+          <button class="" type="submit">
+            Deletar
+          </button>
+        </form>
+      </div>
     </div>
+    {% endfor %}
   </div>
 </div>
+
 {% endblock %}
